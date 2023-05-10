@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
     <title>Онлайн построение двумерных графиков</title>
   </head>
   <body>
@@ -20,6 +20,99 @@
         <br>
       Для корректного решения задачи Вам необходимо ввести функцию, а также интервалы аргумента и значения функции.
     </h2>
-      <script src="https://github.com/nchtlv/plotting_graphs/drawgraphs.js"></script>
+   
+  <script>
+      		function switchTwoVars() {
+			if (!stateOneVar) return;
+			label_vars.innerHTML = 'F(x,y) =';
+			stateOneVar = false;
+			build_derivative.onclick = buildPlane3dLine;
+			step_x.style.display = 'inline';
+			step_y.style.display = 'inline';
+			f.style.display = 'inline';
+			menu_auto_f.style.display = 'none';
+			val_func.value = 'x**2+y**2';
+			
+			val_ay.disabled = false;
+			val_by.disabled = false;
+			step_y.disabled = false;
+		}
+		
+		function switchAutoF() {
+			if (auto_f.checked) {
+				val_ay.disabled = true;
+				val_by.disabled = true;
+				step_y.disabled = true;
+			} else {
+				val_ay.disabled = false;
+				val_by.disabled = false;
+				step_y.disabled = false;
+			}
+		}
+		</script>
+      <table id="tab">
+			<tr id="row">
+				<td id="panel">
+					<div id="menu">
+					<br \>
+                        <!-- Отступ -->
+                        <p>
+							<!-- Радиобокс 1/2 переменных -->
+							<label><input type="radio" class="choice_radio" name="choice" value="1)" onclick="switchOneVar();" checked \> F(x) </label>
+							<label><input type="radio" class="choice_radio" name="choice" value="2)" onclick="switchTwoVars();" \> F(x,y) </label>
+                        </p>
+						
+						<p id="menu_auto_f">
+							<!-- сабж -->
+							<label><i><input type="checkbox" id="auto_f" onclick="switchAutoF();" \> Автовыбор значений Y? </i></label>
+						</p>
+                        
+						<b>
+                        <!-- Область значений Х, шаг по X -->
+                        <p class="menu_x">
+                            
+                                X &isin; [
+                                <input id="val_ax" type="number" class="number_field" autocomplete="off" value="-20" max="100">
+                                , <input id="val_bx" type="number" class="number_field" autocomplete="off" value="20">
+                                ]
+								<span id="step_x" style="display:none;">
+								Шаг
+								<input id="val_hx" type="number" class="number_field" autocomplete="off" value="0.1" step="0.1">
+								</span>
+                        </p>
+              <p class="menu_y"> 
+								Y &isin; [
+                                <input id="val_ay" type="number" class="number_field" autocomplete="off" value="-20">
+                                , 
+                                <input id="val_by" type="number" class="number_field" autocomplete="off" value="20">
+                                ]
+								<span id="step_y" style="display:none;">
+                            Шаг
+                            <input id="val_hy" type="number" class="number_field" autocomplete="off" value="0.1" step="0.1">
+                        </span>
+                        </p>
+						
+						<!-- Область значений F(x,y) -->
+						<p id="f" class="func_params" style="display:none;"> 
+                        <b>F &isin; [
+                        <input id="val_az" type="number" class="number_field" autocomplete="off" value="0">
+                        , 
+                        <input id="val_bz" type="number" class="number_field" autocomplete="off" value="50">
+                        ]
+						<!-- Шаг по F(x,y) -->
+						<span id="step_f">
+							Шаг
+							<input id="val_st" type="number" class="number_field" autocomplete="off" value="5.0" step="0.1"></b>
+						</span>
+						</p> 
+                        </div>
+				</td>	
+				<td id="canvass">
+					<!-- Холст отрисовки графика функции -->
+                    <canvas id="space" width="700px" height="600px"></canvas> 
+				</td>
+			</tr>
+		</table>
+      		<script src="graf.js"></script>
   </body>
 </html>
